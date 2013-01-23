@@ -15,7 +15,7 @@ import urllib2
 def main():
     s = ' '.join(sys.argv[1:])
     if s == "":
-        s = "black moth super rainbow"
+        s = "portishead"
     ui = Ui(s)
     ui.run()
 
