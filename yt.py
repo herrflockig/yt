@@ -11,10 +11,6 @@ import subprocess
 import sys
 import urllib
 import urllib2
-import argparse
-
-# Define possible player modes.
-MPLAYER_MODE="mplayer"
 
 def main():
     s = ' '.join(sys.argv[1:])
@@ -240,7 +236,7 @@ class Ui(object):
                 self._show_message('Order by: (v)iew count, (r)elevance, (p)ublication date or ra(t)ing?')
                 oc = self._main_win.getch()
                 self._ordering = None
-                
+
                 while self._ordering is None:
                     if oc == ord('r'):
                         self._ordering = 'relevance'
@@ -379,10 +375,6 @@ def play_url(url):
     if yt_dl.returncode != 0:
         sys.stderr.write(err)
         raise RuntimeError('Error getting URL.')
-
-    play_url_mplayer(url)
-
-def play_url_mplayer(url):
     player = subprocess.Popen(
             ['mplayer', '-quiet', '--', url.decode('UTF-8').strip()],
             stdout = subprocess.PIPE, stderr = subprocess.PIPE)
@@ -402,39 +394,6 @@ def search(terms):
         return json.load(urllib2.urlopen('%s?%s' % (url, urllib.urlencode(query))))
 
     return { 'fetch_cb': fetch_cb, 'description': 'search for "%s"' % (terms,) }
-
-def user(username):
-    def fetch_cb(start, maxresults, ordering):
-        url = 'https://gdata.youtube.com/feeds/api/users/%s/uploads' % (username,)
-        query = {
-            'v': 2,
-            'alt': 'jsonc',
-            'start-index': start,
-            'max-results': maxresults,
-            'orderby': ordering,
-        }
-        return json.load(urllib2.urlopen('%s?%s' % (url, urllib.urlencode(query))))
-
-    return { 'fetch_cb': fetch_cb, 'description': 'uploads by "%s"' % (username,) }
-
-def standard_feed(feed_name):
-    def fetch_cb(start, maxresults, ordering):
-        url = 'https://gdata.youtube.com/feeds/api/standardfeeds/%s' % (feed_name,)
-        query = {
-            'v': 2,
-            'alt': 'jsonc',
-            'start-index': start,
-            'max-results': maxresults,
-            'orderby': ordering,
-        }
-        return json.load(urllib2.urlopen('%s?%s' % (url, urllib.urlencode(query))))
-
-    feed = { 'fetch_cb': fetch_cb, 'description': '??? standard feed' }
-
-    if feed_name == 'most_viewed':
-        feed['description'] = 'most viewed'
-
-    return feed
 
 # Make it easy to run module by itself without using external tools to deploy it and
 # create additional launch scripts.
