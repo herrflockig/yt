@@ -52,7 +52,7 @@ class Ui(object):
         # Get the locale encoding
         locale.setlocale(locale.LC_ALL, '')
         self._code = "utf-8"
-        
+
         # Start the curses main loop
         curses.wrapper(self._curses_main)
 
@@ -74,6 +74,7 @@ class Ui(object):
         curses.init_pair(4, curses.COLOR_MAGENTA, curses.COLOR_BLACK)
         curses.init_pair(5, curses.COLOR_BLACK, curses.COLOR_GREEN)
         curses.init_pair(6, curses.COLOR_YELLOW, curses.COLOR_BLACK)
+        curses.init_pair(7, curses.COLOR_BLACK, curses.COLOR_GREEN)
 
         # Set attributes
         self._title_attr = curses.color_pair(1)
@@ -295,7 +296,7 @@ class Ui(object):
         uploader = item['uploader']
         color = self._title_attr
         if chosen:
-            color = curses.color_pair(4)
+            color = curses.color_pair(7)
 
         likes = int(item['likeCount']) if 'likeCount' in item else 0
         ratings = int(item['ratingCount']) if 'ratingCount' in item else 0
