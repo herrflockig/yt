@@ -262,7 +262,7 @@ class Ui(object):
         item = self._items[idx]
         url = item['player']['default']
         self._show_message('Playing ' + url)
-        play_url(url,self._player)
+        play_url(url)
 
     def _show_video_items(self, items, idx = 1):
         # Get size of window and maximum number of items per page
@@ -373,7 +373,7 @@ def number(n):
         return '%.1fk' % (n/1000.0,)
     return '%.1fM' % (n//1000000.0,)
 
-def play_url(url,player):
+def play_url(url):
     yt_dl = subprocess.Popen(['youtube-dl', '-g', url], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
     (url, err) = yt_dl.communicate()
     if yt_dl.returncode != 0:
