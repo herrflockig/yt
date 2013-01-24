@@ -221,10 +221,7 @@ class Ui(object):
                 # have we had all the items?
                 if not 'data' in self._last_feed or not 'totalItems' in self._last_feed['data'] or len(self._items) + idx < self._last_feed['data']['totalItems']:
                     idx += n_per_page
-<<<<<<< HEAD
-=======
                 self.chosen = 0
->>>>>>> 365b7ec2c5ea74487462f362075f27053a42db6b
             elif c == ord('K'): # previous
                 if idx > n_per_page:
                     idx -= n_per_page
