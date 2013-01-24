@@ -83,7 +83,7 @@ class Ui(object):
 
         self._status = ''
         self._help = [
-                ('[/]', 'prev/next'),
+                ('J/K', 'prev/next'),
                 ('j', 'down'),
                 ('k', 'up'),
                 ('space', 'select'),
@@ -215,17 +215,19 @@ class Ui(object):
                     else:
                         idx = 0
                     self.chosen = n_per_page - 1
-            elif c == ord(' '): # enter
+            elif c == ord('\n'): # enter
                 self._play_video(self.chosen)
-            elif c == ord(']'): # next
+            elif c == ord('J'): # next
                 # have we had all the items?
                 if not 'data' in self._last_feed or not 'totalItems' in self._last_feed['data'] or len(self._items) + idx < self._last_feed['data']['totalItems']:
                     idx += n_per_page
-            elif c == ord('['): # previous
+                self.chosen = 0
+            elif c == ord('K'): # previous
                 if idx > n_per_page:
                     idx -= n_per_page
                 else:
                     idx = 0
+                self.chosen = 0
             elif c == ord('/'): # search
                 s = self._input('search')
                 if s is not None and len(s) > 0:
