@@ -83,10 +83,10 @@ class Ui(object):
 
         self._status = ''
         self._help = [
-                ('[/]', 'prev/next'),
+                ('J/K', 'prev/next'),
                 ('j', 'down'),
                 ('k', 'up'),
-                ('space', 'select'),
+                ('enter', 'select'),
                 ('o', 'ordering'),
                 ('/', 'search'),
         ]
@@ -215,13 +215,13 @@ class Ui(object):
                     else:
                         idx = 0
                     self.chosen = n_per_page - 1
-            elif c == ord(' '): # enter
+            elif c == ord('\n'): # enter
                 self._play_video(self.chosen)
-            elif c == ord(']'): # next
+            elif c == ord('J'): # next
                 # have we had all the items?
                 if not 'data' in self._last_feed or not 'totalItems' in self._last_feed['data'] or len(self._items) + idx < self._last_feed['data']['totalItems']:
                     idx += n_per_page
-            elif c == ord('['): # previous
+            elif c == ord('K'): # previous
                 if idx > n_per_page:
                     idx -= n_per_page
                 else:
@@ -379,7 +379,6 @@ def play_url(url):
     player = subprocess.Popen(
             ['mplayer', '-quiet', '--', url.decode('UTF-8').strip()],
             stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-    player.wait()
 
 def search(terms):
     def fetch_cb(start, maxresults, ordering):
