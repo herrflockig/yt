@@ -1,0 +1,61 @@
+yt
+==
+version=0.2.0
+
+AUTHOR
+------
+name="Tyler Cone"
+email="herrflockig@gmail.com"
+
+DESCRIPTION
+-----------
+yt is a python Youtube search client with a curses interface.
+
+DEPENDANCIES
+------------
+mplayer
+youtube-dl
+
+ChangeLog
+---------
+todo
+
+NEWS
+----
+version 0.1.0: made the basic interface
+version 0.2.0: added autocomplete for searches in the main interface
+
+INSTALL
+-------
+
+use the setup.py script to install yt
+
+Examples:
+    install to the default directories
+        python setup.py install
+    install to local directory
+        python setup.py install --home=~/.local
+
+COPYING / LICENSE
+-----------------
+
+yt is licensed under WTFPL
+
+        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+                    Version 2, December 2004 
+
+ Copyright (C) 2004 Sam Hocevar <sam@hocevar.net> 
+
+ Everyone is permitted to copy and distribute verbatim or modified 
+ copies of this license document, and changing it is allowed as long 
+ as the name is changed. 
+
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION 
+
+  0. You just DO WHAT THE FUCK YOU WANT TO.
+
+BUGS
+----
+
+Crashes if you go past 1000 results. It's youtube's search api's limit.

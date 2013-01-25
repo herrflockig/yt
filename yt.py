@@ -222,7 +222,9 @@ class Ui(object):
                     # have we had all the items?
                     if not 'data' in self._last_feed or not 'totalItems' in self._last_feed['data'] or len(self._items) + idx < self._last_feed['data']['totalItems']:
                         idx += n_per_page
-                    self.chosen = 0
+                        self.chosen = 0
+                    else:
+                        self.chosen = n_per_page - 1
             elif c == ord('k') or c == curses.KEY_UP: # up
                 self.chosen -= 1
                 if idx == 0 and self.chosen == -1:
