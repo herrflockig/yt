@@ -98,6 +98,8 @@ class Ui(object):
         self._help_bar = curses.newwin(1,w,h-1,0)
         self._help_bar.bkgd(' ', self._bar_attr)
 
+        self._main_win.keypad(1)
+
         self._update_screen()
         self._run_pager()
 
@@ -198,14 +200,14 @@ class Ui(object):
             c = self._main_win.getch()
             if c == ord('q'): # quit
                 break
-            elif c == ord('j'): # down
+            elif c == ord('j') or c == curses.KEY_DOWN: # down
                 self.chosen += 1
                 if self.chosen >= n_per_page:
                     # have we had all the items?
                     if not 'data' in self._last_feed or not 'totalItems' in self._last_feed['data'] or len(self._items) + idx < self._last_feed['data']['totalItems']:
                         idx += n_per_page
                     self.chosen = 0
-            elif c == ord('k'): # up
+            elif c == ord('k') or c == curses.KEY_UP: # up
                 self.chosen -= 1
                 if idx == 0 and self.chosen == -1:
                     self.chosen = 0
@@ -215,14 +217,14 @@ class Ui(object):
                     else:
                         idx = 0
                     self.chosen = n_per_page - 1
-            elif c == ord('\n'): # enter
+            elif c == ord('\n') or c == curses.KEY_RIGHT: # enter
                 self._play_video(self.chosen)
-            elif c == ord('J'): # next
+            elif c == ord(']') or c == curses.KEY_NPAGE or c == ord(curses.ascii.ctrl('d')): # next
                 # have we had all the items?
                 if not 'data' in self._last_feed or not 'totalItems' in self._last_feed['data'] or len(self._items) + idx < self._last_feed['data']['totalItems']:
                     idx += n_per_page
                 self.chosen = 0
-            elif c == ord('K'): # previous
+            elif c == ord('[') or c == curses.KEY_PPAGE or c == ord(curses.ascii.ctrl('u')): # previous
                 if idx > n_per_page:
                     idx -= n_per_page
                 else:
@@ -252,6 +254,8 @@ class Ui(object):
 
                 self._last_feed = None
                 idx = 0
+            elif c == ord(curses.ascii.ctrl('l')): # refresh screen
+                self._update_screen(idx)
 
 
     def _play_video(self, idx):
