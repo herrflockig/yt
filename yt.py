@@ -123,13 +123,29 @@ class Ui(object):
         self._help_bar.refresh()
         input_win = curses.newwin(1, w-len(prompt)-2, h-1, len(prompt)+2)
         input_win.bkgd(' ', self._bar_attr)
+        input_win.keypad(1)
         curses.curs_set(1)
-        curses.echo()
-        try:
-            s = input_win.getstr(0,0)
-        except KeyboardInterrupt:
-            s = None
-        curses.noecho()
+        s = ""
+        while True:
+            c = input_win.getch()
+            if c == 27:
+                s = None
+                break
+            elif c == ord('\n'):
+                s = get_query_result(s)
+                break
+            elif c == curses.KEY_BACKSPACE or c == 127:
+                s = s[:-1]
+            elif c == ord('\t'):
+                s = get_query_result(s)
+            else:
+                s += chr(c)
+
+            input_win.erase()
+            input_win.addstr(0, 0, ('%s' % (get_query_result(s),)).encode(self._code))
+            input_win.addstr(0, 0, ('%s' % (s,)).encode(self._code))
+            input_win.refresh()
+
         curses.curs_set(0)
         return s
 
@@ -400,6 +416,22 @@ def search(terms):
         return json.load(urllib2.urlopen('%s?%s' % (url, urllib.urlencode(query))))
 
     return { 'fetch_cb': fetch_cb, 'description': 'search for "%s"' % (terms,) }
+
+def get_query_result(terms):
+    url = "http://suggestqueries.google.com/complete/search"
+    query = {
+            'q': terms,
+            'client': 'youtube',
+            'ds': 'yt',
+            'hl': 'en',
+            'hjson': 't',
+            'cp': '1',
+        }
+    result = json.load(urllib2.urlopen('%s?%s' % (url, urllib.urlencode(query))))
+    if len(result[1]) > 0:
+        return result[1][0][0]
+    else:
+        return terms
 
 # Make it easy to run module by itself without using external tools to deploy it and
 # create additional launch scripts.
