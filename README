@@ -51,7 +51,7 @@ Examples:
     install to the default directories
         python setup.py install
     install to local directory
-        python setup.py install --home=~/.local
+        python setup.py install --prefix=~/.local
 
 COPYING / LICENSE
 -----------------
