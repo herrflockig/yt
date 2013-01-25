@@ -16,6 +16,23 @@ DEPENDANCIES
 mplayer
 youtube-dl
 
+USAGE
+-----
+yt (search query)
+Example:
+    yt black moth super rainbow
+        *searches youtube for "black moth super rainbow"
+
+Key Bindings:
+    q            - quit
+    j            - go down one result
+    k            - go up one result
+    ^d or pgdown - go down one page
+    ^u or pgup   - go up one page
+    /            - search
+    enter        - play selected video
+    o            - change ordering (relevance, view count, published date, rating)
+
 ChangeLog
 ---------
 todo
