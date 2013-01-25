@@ -11,7 +11,7 @@ DESCRIPTION
 -----------
 yt is a python Youtube search client with a curses interface.
 
-DEPENDANCIES
+DEPENDENCIES
 ------------
 mplayer
 youtube-dl
