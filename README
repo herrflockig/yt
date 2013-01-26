@@ -63,3 +63,7 @@ BUGS
 ----
 
 Crashes if you go past 1000 results. It's youtube's search api's limit.
+
+CREDITS
+-------
+User interface and name largly inspired by (read ganked) https://github.com/rjw57/yt
