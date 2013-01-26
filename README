@@ -44,14 +44,15 @@ version 0.2.0: added autocomplete for searches in the main interface
 
 INSTALL
 -------
-
-use the setup.py script to install yt
+simply copy yt to a directory in your PATH and make it executable
 
 Examples:
     install to the default directories
-        python setup.py install
+        cp yt.py /usr/bin/yt
+        chmod +x /usr/bin/yt
     install to local directory
-        python setup.py install --prefix=~/.local
+        cp yt.py ~/.local/bin/yt
+        chmod +x ~/.local/bin/yt
 
 COPYING / LICENSE
 -----------------

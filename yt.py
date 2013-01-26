@@ -1,11 +1,8 @@
 #!/usr/bin/env python2
-from __future__ import print_function
-
 import curses
 import curses.textpad
 import curses.wrapper
 import json
-import locale
 import re
 import subprocess
 import sys
