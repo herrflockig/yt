@@ -3,6 +3,7 @@ import curses
 import curses.textpad
 import curses.wrapper
 import json
+import locale
 import re
 import subprocess
 import sys
