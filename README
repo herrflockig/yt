@@ -56,12 +56,10 @@ Examples:
 
 COPYING / LICENSE
 -----------------
-
 yt is licensed under WTFPL. see LICENSE
 
 BUGS
 ----
-
 Crashes if you go past 1000 results. It's youtube's search api's limit.
 
 CREDITS
